@@ -1,42 +1,43 @@
+import java.util.ArrayList;
+
 public class Car {
-        constructor(maxCapacity) {
-            this.passengers = [];
-            this.maxCapacity = maxCapacity;
+    private ArrayList<Passenger> passengers;
+    private int maxCapacity;
+
+    public Car(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+        passengers = new ArrayList<>();
+    }
+
+    public int getCapacity() {
+        return maxCapacity;
+    }
+
+    public int seatsRemaining() {
+        return maxCapacity - passengers.size();
+    }
+
+    public boolean addPassenger(Passenger p) {
+        if (passengers.size() < maxCapacity) {
+            passengers.add(p);
+            return true;
+        } else {
+            return false;
         }
-    
-        getCapacity() {
-            return this.maxCapacity;
-        }
-    
-        seatsRemaining() {
-            return this.maxCapacity - this.passengers.length;
-        }
-    
-        addPassenger(passenger) {
-            if (this.passengers.length < this.maxCapacity) {
-                this.passengers.push(passenger);
-                return true;
-            } else {
-                return false;
+    }
+
+    public boolean removePassenger(Passenger p) {
+        return passengers.remove(p);
+    }
+
+    public void printManifest() {
+        if (passengers.isEmpty()) {
+            System.out.println("This car is EMPTY.");
+        } else {
+            System.out.println("Passengers aboard this car:");
+            for (Passenger passenger : passengers) {
+                System.out.println(passenger);
             }
         }
-    
-        removePassenger(passenger) {
-            const index = this.passengers.indexOf(passenger);
-            if (index !== -1) {
-                this.passengers.splice(index, 1);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    
-        printManifest() {
-            if (this.passengers.length > 0) {
-                console.log("Passengers on board:");
-                this.passengers.forEach(passenger => console.log(passenger.name));
-            } else {
-                console.log("This car is EMPTY.");
-            }
-        }
+    }
 }

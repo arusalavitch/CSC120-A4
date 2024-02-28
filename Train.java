@@ -1,33 +1,45 @@
+import java.util.ArrayList;
+
 public class Train {
-    constructor(fuelType, fuelCapacity, numCars, passengerCapacity) {
-        this.engine = new Engine(fuelType, fuelCapacity);
-        this.cars = [];
-        for (let i = 0; i < numCars; i++) {
-            this.cars.push(new Car(passengerCapacity));
+    private Engine engine;
+    private ArrayList<Car> cars;
+
+    public Train(FuelType fuelType, double fuelCapacity, int nCars, int passengerCapacityPerCar) {
+        engine = new Engine(fuelType, fuelCapacity);
+        cars = new ArrayList<>();
+        for (int i = 0; i < nCars; i++) {
+            cars.add(new Car(passengerCapacityPerCar));
         }
     }
 
-    getEngine() {
-        return this.engine;
+    public Engine getEngine() {
+        return engine;
     }
 
-    getCar(index) {
-        return this.cars[index];
+    public Car getCar(int i) {
+        return cars.get(i);
     }
 
-    getMaxCapacity() {
-        return this.cars.reduce((totalCapacity, car) => totalCapacity + car.getCapacity(), 0);
+    public int getMaxCapacity() {
+        int maxCapacity = 0;
+        for (Car car : cars) {
+            maxCapacity += car.getCapacity();
+        }
+        return maxCapacity;
     }
 
-    seatsRemaining() {
-        return this.cars.reduce((remainingSeats, car) => remainingSeats + car.seatsRemaining(), 0);
+    public int seatsRemaining() {
+        int remainingSeats = 0;
+        for (Car car : cars) {
+            remainingSeats += car.seatsRemaining();
+        }
+        return remainingSeats;
     }
 
-    printManifest() {
-        console.log("Train Manifest:");
-        this.cars.forEach((car, index) => {
-            console.log(`Car ${index + 1}:`);
+    public void printManifest() {
+        System.out.println("Passengers aboard the train:");
+        for (Car car : cars) {
             car.printManifest();
-        });
+        }
     }
 }

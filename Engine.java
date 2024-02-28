@@ -3,26 +3,48 @@
 //- a `refuel()` method which will reset the `Engine`'s current fuel level to the maximum, and which doesn't need to `return` anything
 //- a `go()` which will decrease the current fuel level, print some useful information (e.g. remaining fuel level), and return `True` if the fuel level is above 0 and `False` otherwise.
 
-
 public class Engine {
-    constructor(fuelType, fuelLevel) {
+    private FuelType fuelType;
+    private double currentFuelLevel;
+    private double maxFuelLevel;
+
+    public Engine(FuelType fuelType, double maxFuelLevel) {
         this.fuelType = fuelType;
-        this.currentFuelLevel = fuelLevel;
-        this.maxFuelLevel = fuelLevel;
+        this.maxFuelLevel = maxFuelLevel;
+        this.currentFuelLevel = maxFuelLevel;
     }
 
-    refuel() {
-        this.currentFuelLevel = this.maxFuelLevel;
+    public FuelType getFuelType() {
+        return fuelType;
     }
 
-    go() {
-        if (this.currentFuelLevel > 0) {
-            console.log(`Remaining fuel level: ${this.currentFuelLevel}`);
-            this.currentFuelLevel--;
+    public double getCurrentFuelLevel() {
+        return currentFuelLevel;
+    }
+
+    public double getMaxFuelLevel() {
+        return maxFuelLevel;
+    }
+
+    public void refuel() {
+        currentFuelLevel = maxFuelLevel;
+    }
+
+    public boolean go() {
+        if (currentFuelLevel > 0) {
+            System.out.println("Remaining fuel level: " + currentFuelLevel);
+            currentFuelLevel--;
             return true;
         } else {
-            console.log("Out of fuel.");
             return false;
         }
     }
+}
+
+public static void main(String[] args) {
+    Engine myEngine = new Engine(FuelType.ELECTRIC, 100.0);
+    while (myEngine.go()) {
+        System.out.println("Choo choo!");
+    }
+    System.out.println("Out of fuel.");
 }
