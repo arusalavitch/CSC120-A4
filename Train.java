@@ -42,4 +42,5 @@ public class Train {
             car.printManifest();
         }
     }
+    public static main()
 }
