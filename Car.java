@@ -30,7 +30,7 @@ public class Car {
         return passengers.remove(p);
     }
 
-    public void printManifest() {
+    public void printPassengerList() {
         if (passengers.isEmpty()) {
             System.out.println("This car is EMPTY.");
         } else {
