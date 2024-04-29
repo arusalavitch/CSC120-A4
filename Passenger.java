@@ -1,29 +1,43 @@
 public class Passenger {
-    private String name;
+    private final String name;
 
-    // Constructor
+    /**
+     * Constructor for creating a Passenger with a name.
+     * @param name The name of the passenger.
+     */
     public Passenger(String name) {
         this.name = name;
     }
 
-    // Accessor for the passenger's name
+    /**
+     * Getter for the passenger's name.
+     * @return The name of the passenger.
+     */
     public String getName() {
         return name;
     }
 
-    // Attempt to board a Car
+    /**
+     * Attempts to board a car.
+     * @param car The car to board.
+     * @return True if boarding is successful, false otherwise.
+     */
     public boolean boardCar(Car car) {
-        if (car.addPassenger(this)) {
+        if (!car.getPassengers().contains(this) && car.addPassenger(this)) {
             System.out.println(name + " successfully boarded the car.");
             return true;
         } else {
-            System.out.println(name + " could not board the car. It might be full.");
+            System.out.println(name + " could not board the car. It might be full or already onboard.");
             return false;
         }
     }
 
-    // Attempt to get off a Car
-    public boolean getOffCar(Car car) {
+    /**
+     * Attempts to leave a car.
+     * @param car The car to leave.
+     * @return True if leaving is successful, false otherwise.
+     */
+    public boolean leaveCar(Car car) {
         if (car.removePassenger(this)) {
             System.out.println(name + " successfully left the car.");
             return true;
